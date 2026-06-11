@@ -52,7 +52,6 @@ export default function PropertyPage({ params }: { params: Promise<{ id: string 
 
   return (
     <main className="bg-white min-h-screen pb-32">
-      {/* BREADCRUMBS */}
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 overflow-x-auto whitespace-nowrap no-scrollbar">
           <Link href="/#listings" className="hover:text-blue-600 transition-colors">Collection</Link>
@@ -66,20 +65,10 @@ export default function PropertyPage({ params }: { params: Promise<{ id: string 
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
-          {/* MEDIA VIEWER COLUMN */}
           <div className="lg:col-span-8 space-y-6">
-            {/* The Media Frame is now completely clear */}
             <div className="relative aspect-video w-full rounded-[2.5rem] overflow-hidden shadow-2xl bg-slate-100 border-4 border-white">
               {viewMode === '3D' && matterport ? (
-                <iframe 
-                  width="100%" 
-                  height="100%" 
-                  src={`${matterport.url}&play=1&brand=0&mls=1`} 
-                  frameBorder="0" 
-                  allowFullScreen 
-                  allow="vr" 
-                  className="w-full h-full"
-                ></iframe>
+                <iframe width="100%" height="100%" src={`${matterport.url}&play=1&brand=0&mls=1`} frameBorder="0" allowFullScreen allow="vr" className="w-full h-full"></iframe>
               ) : (
                 <div className="w-full h-full grid grid-cols-2 gap-1 overflow-y-auto no-scrollbar bg-slate-200">
                   {images.map((img: any) => (
@@ -89,36 +78,29 @@ export default function PropertyPage({ params }: { params: Promise<{ id: string 
               )}
             </div>
 
-            {/* TOGGLE PILL - MOVED BELOW THE FRAME */}
             <div className="flex justify-center pt-2">
               <div className="inline-flex bg-slate-100 p-1.5 rounded-full shadow-inner border border-slate-200">
                 {matterport && (
-                  <button 
-                    onClick={() => setViewMode('3D')} 
-                    className={`flex items-center gap-2 px-8 py-4 rounded-full font-black text-[10px] tracking-widest transition-all duration-300 ${viewMode === '3D' ? 'bg-slate-900 text-white shadow-xl scale-105' : 'text-slate-400 hover:text-slate-600'}`}
-                  >
+                  <button onClick={() => setViewMode('3D')} className={`flex items-center gap-2 px-8 py-4 rounded-full font-black text-[10px] tracking-widest transition-all duration-300 ${viewMode === '3D' ? 'bg-slate-900 text-white shadow-xl scale-105' : 'text-slate-400 hover:text-slate-600'}`}>
                     <Box size={14} /> 3D WALKTHROUGH
                   </button>
                 )}
-                <button 
-                  onClick={() => setViewMode('PHOTOS')} 
-                  className={`flex items-center gap-2 px-8 py-4 rounded-full font-black text-[10px] tracking-widest transition-all duration-300 ${viewMode === 'PHOTOS' ? 'bg-slate-900 text-white shadow-xl scale-105' : 'text-slate-400 hover:text-slate-600'}`}
-                >
+                <button onClick={() => setViewMode('PHOTOS')} className={`flex items-center gap-2 px-8 py-4 rounded-full font-black text-[10px] tracking-widest transition-all duration-300 ${viewMode === 'PHOTOS' ? 'bg-slate-900 text-white shadow-xl scale-105' : 'text-slate-400 hover:text-slate-600'}`}>
                   <Camera size={14} /> HI-RES PHOTOS
                 </button>
               </div>
             </div>
           </div>
 
-          {/* DATA COLUMN */}
           <div className="lg:col-span-4">
             <div className="sticky top-28 space-y-8">
               <div className="space-y-4">
                 {agency && (
                   <Link href={`/agencies/${agency.id}`} className="inline-block px-4 py-2 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-200 transition-all group">
                     <div className="flex items-center gap-3">
-                       {agency.logo_url && <img src={agency.logo_url} className="h-4 object-contain grayscale group-hover:grayscale-0 transition-all" alt={agency.name}/>}
-                       <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{agency.name}</span>
+                       {/* FULL COLOR LOGO */}
+                       {agency.logo_url && <img src={agency.logo_url} className="h-4 object-contain group-hover:scale-105 transition-transform" alt={agency.name}/>}
+                       <span className="text-[9px] font-black text-slate-900 uppercase tracking-widest">{agency.name}</span>
                     </div>
                   </Link>
                 )}
@@ -132,7 +114,6 @@ export default function PropertyPage({ params }: { params: Promise<{ id: string 
                 </div>
               </div>
 
-              {/* SPEC GRID */}
               <div className="grid grid-cols-3 gap-2 border-y-2 border-slate-50 py-10">
                 <div className="text-center"><div className="font-black text-3xl text-slate-900">{property.bedrooms}</div><div className="text-[9px] font-black text-slate-300 uppercase tracking-widest mt-1">Beds</div></div>
                 <div className="text-center border-x-2 border-slate-50"><div className="font-black text-3xl text-slate-900">{property.bathrooms}</div><div className="text-[9px] font-black text-slate-300 uppercase tracking-widest mt-1">Baths</div></div>
@@ -144,18 +125,11 @@ export default function PropertyPage({ params }: { params: Promise<{ id: string 
                 <p className="text-slate-500 leading-relaxed font-medium text-base">{property.description}</p>
               </div>
 
-              {/* INQUIRY BUTTONS */}
               <div className="grid grid-cols-1 gap-4 pt-6">
-                <button 
-                  onClick={() => handleInquiry('WHATSAPP')}
-                  className="w-full bg-slate-900 text-white py-6 rounded-[2.5rem] font-black text-xs tracking-[0.2em] hover:bg-blue-600 transition-all flex items-center justify-center gap-3 shadow-2xl active:scale-95"
-                >
+                <button onClick={() => handleInquiry('WHATSAPP')} className="w-full bg-slate-900 text-white py-6 rounded-[2.5rem] font-black text-xs tracking-[0.2em] hover:bg-blue-600 transition-all flex items-center justify-center gap-3 shadow-2xl active:scale-95">
                   <MessageSquare size={18} /> CONTACT VIA WHATSAPP
                 </button>
-                <button 
-                  onClick={() => handleInquiry('EMAIL')}
-                  className="w-full bg-white text-slate-900 border-2 border-slate-100 py-6 rounded-[2.5rem] font-black text-xs tracking-[0.2em] hover:bg-slate-50 transition-all flex items-center justify-center gap-3"
-                >
+                <button onClick={() => handleInquiry('EMAIL')} className="w-full bg-white text-slate-900 border-2 border-slate-100 py-6 rounded-[2.5rem] font-black text-xs tracking-[0.2em] hover:bg-slate-50 transition-all flex items-center justify-center gap-3">
                   <Mail size={18} /> INQUIRE BY EMAIL
                 </button>
               </div>

@@ -33,8 +33,9 @@ export default async function AgenciesPage() {
               className="group bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-2xl transition-all border border-slate-100 flex flex-col items-center text-center"
             >
               <div className="h-20 w-full mb-8 flex items-center justify-center">
+                {/* FULL COLOR LOGO */}
                 {agency.logo_url ? (
-                  <img src={agency.logo_url} className="h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500" alt={agency.name} />
+                  <img src={agency.logo_url} className="h-full object-contain group-hover:scale-105 transition-transform duration-500" alt={agency.name} />
                 ) : (
                   <Building2 size={48} className="text-slate-200" />
                 )}

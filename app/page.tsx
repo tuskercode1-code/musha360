@@ -93,26 +93,24 @@ export default async function Home({
         </div>
       </section>
 
-      {/* RESPONSIVE MOVING LOGO BANNER */}
+      {/* FULL COLOR MOVING LOGO BANNER */}
       {partners && partners.length > 0 && (
         <div className="py-8 md:py-14 bg-white border-b border-slate-100 overflow-hidden relative group">
           <div className="animate-marquee whitespace-nowrap flex items-center">
-            {/* Duplicated 4 times to ensure no gaps on mobile or wide screens */}
             {[...partners, ...partners, ...partners, ...partners].map((agency, index) => (
               <div key={index} className="flex items-center mx-6 md:mx-12 h-7 md:h-10">
                 {agency.logo_url ? (
                   <img 
                     src={agency.logo_url} 
-                    className="h-full w-auto object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500" 
+                    className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" 
                     alt={agency.name} 
                   />
                 ) : (
-                  <span className="text-lg md:text-2xl font-black text-slate-200 uppercase italic tracking-tighter">{agency.name}</span>
+                  <span className="text-lg md:text-2xl font-black text-slate-900 uppercase italic tracking-tighter">{agency.name}</span>
                 )}
               </div>
             ))}
           </div>
-          {/* Responsive gradients */}
           <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
         </div>
@@ -146,11 +144,16 @@ export default async function Home({
                   </div>
                 </Link>
 
+                {/* FULL COLOR AGENCY BADGE */}
                 {agency && (
                   <div className="absolute top-6 right-6 z-20">
                     <Link href={`/agencies/${agency.id}`}>
                       <div className="bg-white/95 backdrop-blur-md p-2 md:p-2.5 rounded-2xl shadow-xl border border-white/50 hover:scale-110 transition-all cursor-pointer">
-                        {agency.logo_url ? <img src={agency.logo_url} className="h-5 md:h-6 w-auto object-contain" alt={agency.name} /> : <span className="text-[8px] font-black text-slate-900 uppercase">{agency.name}</span>}
+                        {agency.logo_url ? (
+                          <img src={agency.logo_url} className="h-5 md:h-6 w-auto object-contain" alt={agency.name} />
+                        ) : (
+                          <span className="text-[8px] font-black text-slate-900 uppercase">{agency.name}</span>
+                        )}
                       </div>
                     </Link>
                   </div>
