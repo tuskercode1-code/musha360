@@ -33,27 +33,35 @@ export default async function Home({
 
   return (
     <main className="bg-white min-h-screen">
-      {/* HERO SECTION */}
+      {/* HERO SECTION WITH YOUTUBE BACKGROUND */}
       <section className="relative min-h-[90vh] flex items-center justify-center bg-slate-950 overflow-hidden py-24 md:py-20">
-        <img 
-          src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop" 
-          className="absolute inset-0 w-full h-full object-cover opacity-30 scale-105" 
-          alt="Luxury Villa Background"
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(2,6,23,0.6)_100%)]"></div>
+        
+        {/* YOUTUBE IFRAME BACKGROUND TRICK */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+          <iframe
+            className="absolute top-1/2 left-1/2 w-[300vw] h-[300vh] md:w-[150vw] md:h-[150vh] -translate-x-1/2 -translate-y-1/2 opacity-40"
+            /* REPLACE "YOUR_YOUTUBE_VIDEO_ID" BELOW WITH YOUR ACTUAL VIDEO ID (IN BOTH PLACES) */
+            src="https://www.youtu.be/M-j_LvEK2ZA?si=sZS9c-EgPIDXQuAn"
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+          ></iframe>
+        </div>
+        
+        {/* Dark overlay to make text readable over the video */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_rgba(2,6,23,0.8)_100%)] z-0"></div>
 
         <div className="relative z-10 text-center px-6 w-full max-w-6xl mt-12">
           <div className="inline-flex items-center gap-2 px-5 py-2 bg-blue-600/20 border border-blue-500/30 rounded-full text-blue-400 text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] mb-8 animate-pulse backdrop-blur-sm">
             <Sparkles size={14} /> Welcome to Musha360
           </div>
 
-          <h1 className="text-white text-5xl md:text-8xl font-black mb-6 tracking-tighter italic leading-[0.9] uppercase">
+          <h1 className="text-white text-5xl md:text-8xl font-black mb-6 tracking-tighter italic leading-[0.9] uppercase drop-shadow-2xl">
             Step Inside <br/> <span className="text-blue-500 not-italic">From Anywhere.</span>
           </h1>
           
-          <p className="text-white/70 text-base md:text-xl font-medium mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-white/80 text-base md:text-xl font-medium mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
             Musha360 is the leading destination for high-fidelity property exploration. Physically navigate 
-            <span className="text-white font-bold mx-1 border-b border-white/20">Residential, Commercial, and Industrial</span> 
+            <span className="text-white font-bold mx-1 border-b border-white/30 pb-0.5">Residential, Commercial, and Industrial</span> 
             spaces via immersive 3D walkthroughs.
           </p>
           
