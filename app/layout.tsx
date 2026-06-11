@@ -45,12 +45,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} bg-white text-slate-900 antialiased`}>
         <LoadingScreen />
 
-        {/* PREMIUM GLASSMOPHISM HEADER */}
-        <nav className="fixed top-0 w-full z-[100] bg-white/70 backdrop-blur-xl border-b border-white/20 transition-all duration-300">
+        {/* HEADER */}
+        <nav className={`fixed top-0 w-full z-[100] transition-all duration-300 ${isMenuOpen ? 'bg-white' : 'bg-white/70 backdrop-blur-xl border-b border-white/20'}`}>
           <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
             
             {/* LOGO */}
-            <Link href="/" className="relative z-[110] flex items-center">
+            <Link href="/" onClick={() => setIsMenuOpen(false)} className="relative z-[110] flex items-center">
               <span className="text-xl md:text-2xl font-black tracking-tighter text-slate-900">
                 MUSHA<span className="text-blue-600">360</span>
               </span>
@@ -77,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               )}
             </div>
 
-            {/* MOBILE MENU TOGGLE */}
+            {/* MOBILE MENU TOGGLE BUTTON */}
             <button 
               className="md:hidden relative z-[110] p-2 text-slate-900" 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -86,23 +86,33 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </button>
           </div>
 
-          {/* MOBILE OVERLAY MENU */}
-          <div className={`fixed inset-0 bg-white z-[105] transition-transform duration-500 ease-in-out flex flex-col p-10 pt-32 gap-8 ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-             <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter uppercase italic">Home</Link>
-             <Link href="/agencies" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter uppercase italic">Agencies</Link>
-             <Link href="/#listings" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter uppercase italic">Inventory</Link>
+          {/* FULL SCREEN MOBILE MENU OVERLAY */}
+          {/* Changed to fixed inset-0 to cover the whole screen, added solid bg-white */}
+          <div className={`fixed inset-0 bg-white z-[105] transition-transform duration-500 ease-in-out flex flex-col px-10 pt-32 pb-10 gap-8 h-screen w-screen ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
              
+             {/* Navigation Links */}
+             <div className="flex flex-col gap-6 mt-4">
+               <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter uppercase italic text-slate-900 border-b border-slate-100 pb-4">Home</Link>
+               <Link href="/agencies" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter uppercase italic text-slate-900 border-b border-slate-100 pb-4">Agencies</Link>
+               <Link href="/#listings" onClick={() => setIsMenuOpen(false)} className="text-4xl font-black tracking-tighter uppercase italic text-slate-900 border-b border-slate-100 pb-4">Inventory</Link>
+             </div>
+             
+             {/* Authentication Actions */}
              <div className="mt-auto space-y-4">
                {user ? (
                  <>
-                   <Link href="/admin/dashboard" onClick={() => setIsMenuOpen(false)} className="block text-blue-600 font-bold uppercase tracking-widest text-xs">Admin Dashboard</Link>
-                   <Link href="/admin/add-property" onClick={() => setIsMenuOpen(false)} className="w-full bg-slate-900 text-white py-6 rounded-2xl flex items-center justify-center gap-2 font-black uppercase tracking-widest">
+                   <Link href="/admin/dashboard" onClick={() => setIsMenuOpen(false)} className="block text-center text-blue-600 font-black uppercase tracking-widest text-xs py-2">
+                     Admin Dashboard
+                   </Link>
+                   <Link href="/admin/add-property" onClick={() => setIsMenuOpen(false)} className="w-full bg-blue-600 text-white py-5 rounded-[2rem] flex items-center justify-center gap-2 font-black uppercase tracking-widest shadow-xl">
                      <Plus size={20}/> New Listing
                    </Link>
-                   <button onClick={handleLogout} className="w-full text-red-500 font-bold uppercase tracking-widest text-xs py-4">Sign Out</button>
+                   <button onClick={handleLogout} className="w-full text-red-500 font-black uppercase tracking-widest text-xs py-4">
+                     Sign Out
+                   </button>
                  </>
                ) : (
-                 <Link href="/login" onClick={() => setIsMenuOpen(false)} className="w-full bg-slate-900 text-white py-6 rounded-2xl flex items-center justify-center font-black uppercase tracking-widest">
+                 <Link href="/login" onClick={() => setIsMenuOpen(false)} className="w-full bg-slate-900 text-white py-6 rounded-[2rem] flex items-center justify-center font-black uppercase tracking-widest shadow-2xl mt-8">
                    Agent Login
                  </Link>
                )}
@@ -110,8 +120,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </nav>
 
-        {/* We remove the pt-20 here so the background flows behind the nav */}
-        <div className="">
+        <div>
           {children}
         </div>
       </body>
